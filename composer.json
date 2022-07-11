@@ -13,8 +13,7 @@
         "laravel/tinker": "^2.7",
         "pda/pheanstalk": "^4.0",
         "predis/predis": "^2.0",
-        "sentry/sentry-laravel": "^2.12",
-        "barryvdh/laravel-ide-helper": "^2.12"
+        "sentry/sentry-laravel": "^2.12"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -42,9 +41,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:meta"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
