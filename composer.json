@@ -13,10 +13,10 @@
         "laravel/tinker": "^2.7",
         "pda/pheanstalk": "^4.0",
         "predis/predis": "^2.0",
-        "sentry/sentry-laravel": "^2.12"
+        "sentry/sentry-laravel": "^2.12",
+        "barryvdh/laravel-ide-helper": "^2.12",
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
