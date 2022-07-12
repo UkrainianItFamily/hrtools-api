@@ -15,6 +15,10 @@ use App\Http\Controllers\Api\StatusController;
 |
 */
 
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
