@@ -48,8 +48,8 @@ final class AuthController extends ApiController
     ): JsonResponse
     {
         $request = new LoginRequest(
-            $httpRequest->email,
-            $httpRequest->password
+            $httpRequest->get('email'),
+            $httpRequest->get('password'),
         );
         $response = $action->execute($request);
 
