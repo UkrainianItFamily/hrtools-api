@@ -20,6 +20,8 @@ Route::prefix('v1')->group(function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+        Route::post('/new-password', [AuthController::class, 'applyNewPassword']);
     });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
