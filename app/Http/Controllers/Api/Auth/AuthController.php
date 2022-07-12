@@ -41,4 +41,19 @@ final class AuthController extends ApiController
         return $this->successResponse($authenticationResponseArrayPresenter->present($response));
     }
 
+    public function login(
+        LoginHttpRequest $httpRequest,
+        LoginAction $action,
+        AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter
+    ): JsonResponse
+    {
+        $request = new LoginRequest(
+            $httpRequest->email,
+            $httpRequest->password
+        );
+        $response = $action->execute($request);
+
+        return $this->successResponse($authenticationResponseArrayPresenter->present($response));
+    }
+
 }
