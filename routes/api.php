@@ -15,14 +15,18 @@ use App\Http\Controllers\Api\StatusController;
 |
 */
 
-Route::group(['prefix' => 'auth'], function () {
-    Route::post('/register', [AuthController::class, 'register']);
-});
+Route::prefix('v1')->group(function () {
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('/register', [AuthController::class, 'register']);
+    });
 
-Route::get('/status/{serviceName?}', [StatusController::class, 'status']);
-Route::post('/mail', [StatusController::class, 'mail']);
-Route::post('/broadcast', [StatusController::class, 'event']);
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/status/{serviceName?}', [StatusController::class, 'status']);
+    Route::post('/mail', [StatusController::class, 'mail']);
+    Route::post('/broadcast', [StatusController::class, 'event']);
+
+});
