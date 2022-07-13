@@ -21,7 +21,7 @@ class RegisterHttpRequest extends ApiFormRequest
             'password' => ['required',Password::min(8)->mixedCase()->numbers()],
             'name' => 'required|string|min:2',
             'lastname' => 'required|string|min:2',
-            'phone' => 'required|string|min:2'
+            'phone' => 'required|string|min:7'
         ];
     }
 }
