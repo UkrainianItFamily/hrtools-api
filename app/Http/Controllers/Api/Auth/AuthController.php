@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Actions\Auth\LoginAction;
-use App\Actions\Auth\LoginRequest;
 use App\Actions\Auth\RegisterAction;
 use App\Actions\Auth\RegisterRequest;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Presenters\AuthenticationResponseArrayPresenter;
-use App\Http\Request\Api\Auth\LoginHttpRequest;
 use App\Http\Request\Api\Auth\RegisterHttpRequest;
 use App\Http\Response\ApiResponse;
 use Illuminate\Http\JsonResponse;
