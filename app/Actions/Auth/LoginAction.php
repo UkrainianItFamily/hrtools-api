@@ -17,7 +17,7 @@ final class LoginAction
             'password' => $request->getPassword()
         ]);
 
-        if (!$authResult ) {
+        if (!$authResult) {
             throw new AuthenticationException();
         }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\StatusController;
@@ -18,7 +19,6 @@ use App\Http\Controllers\Api\StatusController;
 Route::prefix('v1')->group(function () {
 
     Route::group(['prefix' => 'auth'], function () {
-        Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
     });
 
