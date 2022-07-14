@@ -2,7 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Http\Response\ApiResponse;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,5 +53,44 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            return ApiResponse::error(
+                ErrorCode::VALIDATION_FAILED,
+                $exception->validator->errors()->first()
+            );
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            return ApiResponse::error(
+                ErrorCode::HTTP_METHOD_NOT_ALLOWED,
+                'Http method not allowed.'
+            );
+        }
+
+        if ($exception instanceof AuthorizationException) {
+            return ApiResponse::forbidden(
+                'Forbidden.'
+            );
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return ApiResponse::unauthenticated();
+        }
+
+        // NotFoundHttpException - route doesn't exist
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            return ApiResponse::notFound('Resource not found.');
+        }
+
+        // if our custom application logic error occurred
+        if ($exception instanceof \DomainException) {
+            return ApiResponse::error(ErrorCode::VALIDATION_FAILED, $exception->getMessage());
+        }
+
+        return parent::render($request, $exception);
     }
 }
