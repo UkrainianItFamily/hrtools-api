@@ -16,7 +16,7 @@ final class ResetPasswordHttpRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'sometimes|required|email',
         ];
     }
 }
