@@ -24,17 +24,6 @@ final class AuthController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware(
-            'auth:api',
-                ['except' =>
-                    [
-                        'login',
-                        'register',
-                        'resetPassword',
-                        'applyNewPassword'
-                    ]
-                ]
-        );
     }
 
     public function register(
@@ -50,6 +39,7 @@ final class AuthController extends ApiController
             $httpRequest->get('lastname'),
             $httpRequest->get('phone')
         );
+
         $response = $action->execute($request);
 
         return $this->successResponse($authenticationResponseArrayPresenter->present($response));

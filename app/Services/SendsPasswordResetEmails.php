@@ -71,7 +71,7 @@ trait SendsPasswordResetEmails
     protected function sendResetLinkResponse(Request $request, $response)
     {
         return $this->successResponse([
-            'message' => 'Mail has been set for password reset',
+            'message' => 'Mail has been sent for password reset',
             'data' => $response,
         ]);
     }

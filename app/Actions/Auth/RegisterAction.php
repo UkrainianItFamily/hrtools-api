@@ -6,10 +6,7 @@ namespace App\Actions\Auth;
 
 use App\Repository\UserRepository;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Mail\Mailer;
-use App\Mail\WelcomeEmail;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
 
 final class RegisterAction
 {
