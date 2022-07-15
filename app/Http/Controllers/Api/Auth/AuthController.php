@@ -21,7 +21,7 @@ final class AuthController extends ApiController
         ResetPasswordAction $action
     )
     {
-        return $action->execute($request);
+        return $this->successResponse($action->execute($request));
     }
 
     public function applyNewPassword(
@@ -29,7 +29,7 @@ final class AuthController extends ApiController
         ApplyNewPasswordAction $action
     )
     {
-        return $action->execute($request);
+        return $this->successResponse($action->execute($request));
     }
 
 }

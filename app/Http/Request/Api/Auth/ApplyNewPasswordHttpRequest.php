@@ -17,9 +17,8 @@ final class ApplyNewPasswordHttpRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'sometimes|required|email',
-            'password' => ['required',Password::min(8)->mixedCase()->numbers()],
-            'password_confirmation' => ['required',Password::min(8)->mixedCase()->numbers()],
+            'email' => 'exists:users|required|email',
+            'password' => ['required','confirmed',Password::min(8)->mixedCase()->numbers()],
         ];
     }
 }
