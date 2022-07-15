@@ -27,7 +27,7 @@ final class RegisterAction
 
         $token = JWTAuth::fromUser($user);
 
-        event(new Registered($user));
+        //event(new Registered($user));
 
         return new AuthenticationResponse(
             $token,
