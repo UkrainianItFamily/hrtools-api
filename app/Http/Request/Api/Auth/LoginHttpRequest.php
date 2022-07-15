@@ -17,7 +17,7 @@ final class LoginHttpRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'sometimes|required|email',
+            'email' => 'exists:users|required|email',
             'password' => ['required',Password::min(8)->mixedCase()->numbers()],
         ];
     }
