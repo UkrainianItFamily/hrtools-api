@@ -9,6 +9,7 @@ use App\Actions\Auth\LoginRequest;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Presenters\AuthenticationResponseArrayPresenter;
 use App\Http\Request\Api\Auth\LoginHttpRequest;
+
 use Illuminate\Http\JsonResponse;
 
 final class AuthController extends ApiController

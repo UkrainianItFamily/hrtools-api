@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->isLocal()) {
             $this->app->register(TelescopeServiceProvider::class);
-            $this->app->register(IdeHelperServiceProvider::class);
         }
     }
 
