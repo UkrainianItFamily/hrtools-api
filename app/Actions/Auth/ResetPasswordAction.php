@@ -15,7 +15,7 @@ final class ResetPasswordAction extends ApiController
     {
     }
 
-    public function execute(Request $request) :array
+    public function execute(Request $request): array
     {
         $response = Password::sendResetLink(
             $request->only('email')

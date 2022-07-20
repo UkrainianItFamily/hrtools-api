@@ -16,7 +16,7 @@ class ApplyNewPasswordAction extends ApiController
     {
     }
 
-    public function execute(Request $request)
+    public function execute(Request $request): array
     {
         $response = Password::reset(
             $request->only('token', 'email', 'password', 'password_confirmation'),
@@ -28,6 +28,7 @@ class ApplyNewPasswordAction extends ApiController
                 $user->save();
             }
         );
+
         return $this->changePasswordResponse->getResponse($response,  Password::PASSWORD_RESET);
     }
 }
