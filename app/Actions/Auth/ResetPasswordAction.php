@@ -10,15 +10,17 @@ use Illuminate\Support\Facades\Password;
 
 final class ResetPasswordAction extends ApiController
 {
-    public function execute(Request $request)
+
+    public function __construct(private ChangePasswordResponse $changePasswordResponse)
+    {
+    }
+
+    public function execute(Request $request) :array
     {
         $response = Password::sendResetLink(
             $request->only('email')
         );
 
-        return $response === Password::RESET_LINK_SENT
-            ? ['status' => __($response)]
-            : ['email' => __($response)];
-
+        return $this->changePasswordResponse->getResponse($response,  Password::RESET_LINK_SENT);
     }
 }

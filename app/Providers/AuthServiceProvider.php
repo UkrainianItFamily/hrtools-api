@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         ResetPassword::createUrlUsing(function ($user, string $token) {
-            return 'https://hr-tools-academy-front.herokuapp.com/auth/reset-password?token='.$token.'&email=' . $user->email;
+            return env('URL_CONFIRMATION_EMAIL') . $token .'&email=' . $user->email;
         });
     }
 }

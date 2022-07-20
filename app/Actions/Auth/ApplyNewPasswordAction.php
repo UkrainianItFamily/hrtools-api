@@ -12,6 +12,10 @@ use Illuminate\Support\Str;
 
 class ApplyNewPasswordAction extends ApiController
 {
+    public function __construct(private ChangePasswordResponse $changePasswordResponse)
+    {
+    }
+
     public function execute(Request $request)
     {
         $response = Password::reset(
@@ -24,8 +28,6 @@ class ApplyNewPasswordAction extends ApiController
                 $user->save();
             }
         );
-        return $response === Password::PASSWORD_RESET
-            ? ['status' => __($response)]
-            : ['email' => __($response)];
+        return $this->changePasswordResponse->getResponse($response,  Password::PASSWORD_RESET);
     }
 }
