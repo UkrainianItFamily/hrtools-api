@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Presenters;
 
+use Illuminate\Support\Collection;
 use App\Actions\Status\StatusParameter;
 use App\Contracts\PresenterCollectionInterface;
-use Illuminate\Support\Collection;
 
 final class StatusArrayPresenter implements PresenterCollectionInterface
 {
@@ -14,7 +14,7 @@ final class StatusArrayPresenter implements PresenterCollectionInterface
     {
         return [
             'name' => $statusParameter->getName(),
-            'value' => $statusParameter->getValue()
+            'value' => $statusParameter->getValue(),
         ];
     }
 

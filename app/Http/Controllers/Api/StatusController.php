@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Presenters\StatusArrayPresenter;
 use Illuminate\Http\Request;
 use App\Actions\Status\StatusAction;
 use App\Actions\Status\Mail\MailAction;
 use App\Actions\Status\Mail\MailRequest;
 use App\Actions\Status\Event\EventAction;
 use App\Actions\Status\Event\EventRequest;
+use App\Http\Presenters\StatusArrayPresenter;
 
 class StatusController extends ApiController
 {
@@ -32,9 +32,9 @@ class StatusController extends ApiController
         MailAction $action
     ) {
         $action->execute(new MailRequest(
-                             $request->email,
-                             $request->message
-                         ));
+            $request->email,
+            $request->message
+        ));
 
         return $this->emptyResponse();
     }
@@ -44,8 +44,8 @@ class StatusController extends ApiController
         EventAction $action
     ) {
         $action->execute(new EventRequest(
-                             $request->message
-                         ));
+            $request->message
+        ));
 
         return $this->emptyResponse();
     }

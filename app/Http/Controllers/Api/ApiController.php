@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Contracts\PresenterCollectionInterface;
-use App\Contracts\PresenterInterface;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
+use App\Contracts\PresenterCollectionInterface;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ApiController extends BaseController
 {
@@ -28,8 +27,8 @@ class ApiController extends BaseController
         return new JsonResponse([
                                     'error' => [
                                         'http_code' => $status,
-                                        'message' => $message
-                                    ]
+                                        'message' => $message,
+                                    ],
                                 ], $status);
     }
 
@@ -43,8 +42,8 @@ class ApiController extends BaseController
                                         'total' => $paginator->total(),
                                         'current_page' => $paginator->currentPage(),
                                         'per_page' => $paginator->perPage(),
-                                        'last_page' => $paginator->lastPage()
-                                    ]
+                                        'last_page' => $paginator->lastPage(),
+                                    ],
                                 ]);
     }
 }
