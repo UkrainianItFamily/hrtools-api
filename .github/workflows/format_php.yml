@@ -1,4 +1,4 @@
-name: Format (PHP)
+name: Pre-commit
 
 on:
   push:
@@ -18,7 +18,8 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Install
-        run: composer install
+        run: |-
+          composer install
 
       - name: Run pint code-fixer
         run: ./vendor/bin/pint
