@@ -23,7 +23,7 @@ class TestMail extends Mailable implements ShouldQueue
     {
         return $this->view('emails.test')
             ->from(config('mail.from.address'), config('mail.from.name'))
-            ->subject('Schedulia | Test | ' . config('app.env'))
-            ->with([ 'test_message' => $this->message ]);
+            ->subject('Schedulia | Test | '.config('app.env'))
+            ->with(['test_message' => $this->message]);
     }
 }

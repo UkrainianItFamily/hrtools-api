@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Actions\Status\Event;
 
-use Illuminate\Support\Collection;
-
 class EventRequest
 {
     private string $message;

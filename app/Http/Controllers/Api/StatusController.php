@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Presenters\StatusArrayPresenter;
-use Illuminate\Http\Request;
-use App\Actions\Status\StatusAction;
-use App\Actions\Status\Mail\MailAction;
-use App\Actions\Status\Mail\MailRequest;
 use App\Actions\Status\Event\EventAction;
 use App\Actions\Status\Event\EventRequest;
+use App\Actions\Status\Mail\MailAction;
+use App\Actions\Status\Mail\MailRequest;
+use App\Actions\Status\StatusAction;
+use App\Http\Presenters\StatusArrayPresenter;
+use Illuminate\Http\Request;
 
 class StatusController extends ApiController
 {

@@ -14,7 +14,7 @@ final class StatusArrayPresenter implements PresenterCollectionInterface
     {
         return [
             'name' => $statusParameter->getName(),
-            'value' => $statusParameter->getValue()
+            'value' => $statusParameter->getValue(),
         ];
     }
 
