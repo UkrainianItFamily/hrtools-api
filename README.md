@@ -1,4 +1,4 @@
-# HRTools Api
+# HRTools | Backend
 
 ## Technologies
 
