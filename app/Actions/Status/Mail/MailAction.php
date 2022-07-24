@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Actions\Status\Mail;
 
-use Mail;
 use App\Mail\TestMail;
+use Mail;
 
 class MailAction
 {

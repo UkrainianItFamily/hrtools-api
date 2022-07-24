@@ -12,8 +12,11 @@ use Illuminate\Redis\RedisManager;
 class StatusAction
 {
     private DatabaseManager $databaseManager;
+
     private FilesystemManager $filesystemManager;
+
     private RedisManager $redisManager;
+
     private CacheManager $cacheManager;
 
     public function __construct(
@@ -72,7 +75,7 @@ class StatusAction
     {
         return new StatusParameter(
             'app',
-            config('app.name') . ' | ' . config('app.env')
+            config('app.name').' | '.config('app.env')
         );
     }
 
@@ -80,7 +83,7 @@ class StatusAction
     {
         return new StatusParameter(
             'server',
-            'PHP: ' . \phpversion() . ' | ' . 'IP: ' . $_SERVER['REMOTE_ADDR']
+            'PHP: '.\phpversion().' | '.'IP: '.$_SERVER['REMOTE_ADDR']
         );
     }
 
@@ -120,7 +123,7 @@ class StatusAction
     {
         $result = $this->databaseManager->connection()->select('select version();');
 
-        if (empty($result) || !isset($result)) {
+        if (empty($result) || ! isset($result)) {
             return '';
         }
 
@@ -133,7 +136,7 @@ class StatusAction
     {
         $redisInfo = $this->redisManager->command('INFO');
 
-        return 'Redis ' . $redisInfo['Server']['redis_version'] . ', (' . $redisInfo['Server']['os'] . ')';
+        return 'Redis '.$redisInfo['Server']['redis_version'].', ('.$redisInfo['Server']['os'].')';
     }
 
     private function getCacheInfo(): string
@@ -142,7 +145,7 @@ class StatusAction
         $cache->set('healthcheck', true);
         $result = $cache->pull('healthcheck');
 
-        return 'Driver: ' . $this->cacheManager->getDefaultDriver() . '. Cache: ' . ($result === true ? 'true' : 'false');
+        return 'Driver: '.$this->cacheManager->getDefaultDriver().'. Cache: '.($result === true ? 'true' : 'false');
     }
 
     private function getStorageInfo(): string
@@ -160,6 +163,6 @@ class StatusAction
         $data = $fs->get('healthcheck.txt');
         $url = $fs->url('healthcheck.txt');
 
-        return 'Driver: ' . $this->filesystemManager->getDefaultDriver() . '. Accessability: ' . $data . '. Url: ' . $url;
+        return 'Driver: '.$this->filesystemManager->getDefaultDriver().'. Accessability: '.$data.'. Url: '.$url;
     }
 }
