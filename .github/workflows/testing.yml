@@ -23,7 +23,7 @@ jobs:
 
       - name: Run pint code-fixer
         run: |-
-        ./vendor/bin/pint
+          ./vendor/bin/pint
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
