@@ -31,9 +31,9 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Cache composer
-          id: composer-cache
-          run: |
-            echo "::set-output name=dir::$(composer config cache-files-dir)"
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
             - uses: actions/cache@v2
               with:
                 path: ${{ steps.composer-cache.outputs.dir }}
@@ -48,8 +48,8 @@ jobs:
           commit_message: Apply pint code-fixer changes
 
       - name: Run Php unit tests
-          run: |-
-            composer install
-            cp .env.testing.example .env.testing
-            ./vendor/bin/phpunit --coverage-clover coverage.xml -c phpunit.github.xml
-#            bash <(curl -s https://codecov.io/bash)
+        run: |-
+          composer install
+          cp .env.testing.example .env.testing
+          ./vendor/bin/phpunit --coverage-clover coverage.xml -c phpunit.github.xml
+        #            bash <(curl -s https://codecov.io/bash)
