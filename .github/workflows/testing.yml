@@ -1,45 +1,30 @@
-name: testing
+name: Pre-commit
 
 on:
   push:
     branches:
       - 'main'
       - 'dev'
+  pull_request:
+    paths:
+      - '**.php'
 
 jobs:
-  Testing:
+ testing:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:12
-        env:
-          POSTGRES_USER: user-test
-          POSTGRES_PASSWORD: secret
-          POSTGRES_DB: hrtools-test
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Run pint code-fixer
+      - name: Install
         run: |-
           composer install
-          ./vendor/bin/pint
+
+      - name: Run pint code-fixer
+        run: |-
+        ./vendor/bin/pint
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply pint code-fixer changes
-
-      - name: Run Php unit tests
-        run: |-
-          cp .env.example .env.testing
-          ./vendor/bin/phpunit
-        #            bash <(curl -s https://codecov.io/bash)
