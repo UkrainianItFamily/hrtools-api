@@ -40,6 +40,6 @@ jobs:
 
       - name: Run Php unit tests
         run: |-
-          cp .env.testing.example .env.testing
+          cp .env.example .env.testing
           ./vendor/bin/phpunit --coverage-clover coverage.xml -c phpunit.github.xml
         #            bash <(curl -s https://codecov.io/bash)
