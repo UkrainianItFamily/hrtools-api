@@ -44,14 +44,14 @@ docker-compose up -d
 
 Install composer dependencies and generate app key:
 ```bash
-docker exec -it clm-app composer install
-docker exec -it clm-app php artisan key:generate
+docker exec -it hrtools-app composer install
+docker exec -it hrtools-app php artisan key:generate
 ```
 
 Database migrations install (set proper .env vars)
 ```bash
-docker exec -it clm-app php artisan migrate
-docker exec -it clm-app php artisan db:seed
+docker exec -it hrtools-app php artisan migrate
+docker exec -it hrtools-app php artisan db:seed
 ```
 
 Application server should be ready on `http://localhost:<APP_PORT>`
