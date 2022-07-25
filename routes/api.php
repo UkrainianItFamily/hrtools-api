@@ -38,5 +38,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('email')->group(function () {
         Route::post('verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
         Route::post('resend/{id}', [VerificationController::class, 'resend'])->name('verification.resend');
+        Route::post('verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
+        Route::post('resend/{id}', [VerificationController::class, 'resend'])->name('verification.resend');
     });
 });
