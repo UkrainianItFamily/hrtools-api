@@ -12,10 +12,15 @@ use InvalidArgumentException;
 final class ApiResponse extends JsonResponse
 {
     private const CLIENT_ERROR_STATUS = 400;
+
     private const NO_CONTENT_STATUS = 204;
+
     private const FORBIDDEN_STATUS = 403;
+
     private const RESOURCE_NOT_FOUND_STATUS = 404;
+
     private const RESOURCE_CREATED_STATUS = 201;
+
     private const UNAUTHENTICATED_STATUS = 401;
 
     public static function error(string $code, string $message): self
@@ -26,9 +31,9 @@ final class ApiResponse extends JsonResponse
             'errors' => [
                 [
                     'code' => $code,
-                    'message' => $message
-                ]
-            ]
+                    'message' => $message,
+                ],
+            ],
         ], self::CLIENT_ERROR_STATUS);
     }
 
@@ -78,7 +83,7 @@ final class ApiResponse extends JsonResponse
                 'per_page' => $paginator->perPage(),
                 'current_page' => $paginator->currentPage(),
                 'last_page' => $paginator->lastPage(),
-            ]
+            ],
         ]);
     }
 

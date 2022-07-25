@@ -13,7 +13,8 @@ final class ForgotPasswordAction
     {
         $response = Password::broker()->sendResetLink(['email' => $request->getEmail()]);
 
-        if($response != Password::RESET_LINK_SENT)
+        if ($response != Password::RESET_LINK_SENT) {
             throw new FailedSentPasswordResetLinkException();
+        }
     }
 }

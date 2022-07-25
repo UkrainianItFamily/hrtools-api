@@ -16,7 +16,7 @@ class VerificationController extends ApiController
         VerificationAction $action,
     ): JsonResponse {
         $verificationRequest = new VerificationRequest(
-            (int)$user_id,
+            (int) $user_id,
             $validSignature,
         );
 
@@ -32,7 +32,7 @@ class VerificationController extends ApiController
     ) {
         $action->execute(
             new VerificationRequest(
-                (int)$user_id,
+                (int) $user_id,
                 $request,
             )
         );

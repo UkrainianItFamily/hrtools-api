@@ -15,8 +15,9 @@ final class UserRepository
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return User
+     *
      * @throws ModelNotFoundException
      */
     public function getById(int $id): User

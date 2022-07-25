@@ -2,16 +2,19 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Str;
-use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class AuthApiTest extends TestCase
 {
     private $email;
+
     private $password;
+
     private $api_url;
+
     private $user;
 
     public function setUp(): void
@@ -40,7 +43,7 @@ class AuthApiTest extends TestCase
     {
         $response = $this->postJson($this->api_url, [
             'email' => $this->user->email,
-            'password' => $this->password
+            'password' => $this->password,
         ]);
 
         $response
@@ -52,7 +55,7 @@ class AuthApiTest extends TestCase
     {
         $response = $this->postJson($this->api_url, [
             'email' => Str::random(15).'@mail.com',
-            'password' => $this->password
+            'password' => $this->password,
         ]);
 
         $response
@@ -64,12 +67,12 @@ class AuthApiTest extends TestCase
     {
         $response = $this->postJson($this->api_url, [
             'email' => Str::random(10),
-            'password' => $this->password
+            'password' => $this->password,
         ]);
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(['email' => ["The email must be a valid email address."]]);
+            ->assertJsonFragment(['email' => ['The email must be a valid email address.']]);
     }
 
     public function test_incorrect_password()
@@ -81,6 +84,6 @@ class AuthApiTest extends TestCase
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(['password' => ["The password must be at least 8 characters."]]);
+            ->assertJsonFragment(['password' => ['The password must be at least 8 characters.']]);
     }
 }

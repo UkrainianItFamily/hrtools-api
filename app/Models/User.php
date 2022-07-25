@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Notifications\EmailVerificationNotification;
 use App\Notifications\MailResetPasswordNotification;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User
- * @package App\Models
+ *
  * @property int $id
  * @property string $name
  * @property string $last_name
@@ -21,7 +20,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $phone
  * @property string $password
  */
-
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -56,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'date_birth' => 'date:Y-m-d'
+        'date_birth' => 'date:Y-m-d',
     ];
 
     /**
@@ -116,5 +114,4 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->notify(new MailResetPasswordNotification($token));
     }
-
 }

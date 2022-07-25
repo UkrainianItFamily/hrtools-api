@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -18,9 +17,13 @@ class RegistrationApiTest extends TestCase
     use RefreshDatabase;
 
     private string $register_api_url;
+
     private string $resend_url;
+
     private mixed $user;
+
     private mixed $user_not_verified;
+
     private mixed $user_not_verified_two;
 
     public function setUp(): void
@@ -44,7 +47,7 @@ class RegistrationApiTest extends TestCase
             'email' => 'testnotverified@example.com',
             'phone' => '380951122999',
             'password' => Hash::make('Smith123456'),
-            'email_verified_at' => NULL
+            'email_verified_at' => null,
         ]);
 
         $this->user_not_verified_two = User::factory()->create([
@@ -53,7 +56,7 @@ class RegistrationApiTest extends TestCase
             'email' => 'testnotverified2@example.com',
             'phone' => '380951122888',
             'password' => Hash::make('Smith123456'),
-            'email_verified_at' => NULL
+            'email_verified_at' => null,
         ]);
     }
 
@@ -64,80 +67,80 @@ class RegistrationApiTest extends TestCase
         $response
             ->assertStatus(422)
             ->assertJson([
-                "message" => __('validation.required', ['attribute' => 'first_name'])." (and 4 more errors)",
-                "errors" => [
-                    "first_name" => [__('validation.required', ['attribute' => 'first_name'])],
-                    "last_name" => [__('validation.required', ['attribute' => 'last_name'])],
-                    "email" => [__('validation.required', ['attribute' => __('validation.attributes.email')])],
-                    "phone" => [__('validation.required', ['attribute' => 'phone'])],
-                    "password" => [__('validation.required', ['attribute' => __('validation.attributes.password')])],
-                ]
+                'message' => __('validation.required', ['attribute' => 'first_name']).' (and 4 more errors)',
+                'errors' => [
+                    'first_name' => [__('validation.required', ['attribute' => 'first_name'])],
+                    'last_name' => [__('validation.required', ['attribute' => 'last_name'])],
+                    'email' => [__('validation.required', ['attribute' => __('validation.attributes.email')])],
+                    'phone' => [__('validation.required', ['attribute' => 'phone'])],
+                    'password' => [__('validation.required', ['attribute' => __('validation.attributes.password')])],
+                ],
             ]);
     }
 
     public function test_email_already_taken()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "testuser@example.com",
-            "phone" => "380951122444",
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith123456",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'testuser@example.com',
+            'phone' => '380951122444',
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith123456',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(["email" => [__('validation.unique', ['attribute' => __('validation.attributes.email')])]]);
+            ->assertJsonFragment(['email' => [__('validation.unique', ['attribute' => __('validation.attributes.email')])]]);
     }
 
     public function test_phone_already_taken()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "john@example.com",
-            "phone" => "380951122333",
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith123456",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'john@example.com',
+            'phone' => '380951122333',
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith123456',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(["phone" => [__('validation.unique', ['attribute' => 'phone'])]]);
+            ->assertJsonFragment(['phone' => [__('validation.unique', ['attribute' => 'phone'])]]);
     }
 
     public function test_repeat_password()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "john@example.com",
-            "phone" => "380951122555",
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'john@example.com',
+            'phone' => '380951122555',
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(["password" => [__('validation.confirmed', ['attribute' => 'password'])]]);
+            ->assertJsonFragment(['password' => [__('validation.confirmed', ['attribute' => 'password'])]]);
     }
 
     public function test_incorrect_password()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "john@example.com",
-            "phone" => "380951122555",
-            "password" => "smith",
-            "password_confirmation" => "smith",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'john@example.com',
+            'phone' => '380951122555',
+            'password' => 'smith',
+            'password_confirmation' => 'smith',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
@@ -145,59 +148,59 @@ class RegistrationApiTest extends TestCase
         $response
             ->assertStatus(422)
             ->assertJsonFragment([
-                "password" => [
+                'password' => [
                     __('validation.size.string', ['attribute' => 'password', 'size' => '8']),
                     __('validation.password.mixed', ['attribute' => 'password']),
                     __('validation.password.numbers', ['attribute' => 'password']),
-                ]
+                ],
             ]);
     }
 
     public function test_incorrect_phone()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "john@example.com",
-            "phone" => Str::random(11),
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith123456",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'john@example.com',
+            'phone' => Str::random(11),
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith123456',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(["phone" => [__('validation.regex', ['attribute' =>'phone'])]]);
+            ->assertJsonFragment(['phone' => [__('validation.regex', ['attribute' => 'phone'])]]);
     }
 
     public function test_incorrect_email()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "john-example.com",
-            "phone" => "380951122555",
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith123456",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'john-example.com',
+            'phone' => '380951122555',
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith123456',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
 
         $response
             ->assertStatus(422)
-            ->assertJsonFragment(["email" => [__('validation.email', ['attribute' => __('validation.attributes.email')])]]);
+            ->assertJsonFragment(['email' => [__('validation.email', ['attribute' => __('validation.attributes.email')])]]);
     }
 
     public function test_incorrect_name_and_last_name()
     {
         $userData = [
-            "first_name" => "Jo",
-            "last_name" => "Sm",
-            "email" => "john@example.com",
-            "phone" => "380951122555",
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith123456",
+            'first_name' => 'Jo',
+            'last_name' => 'Sm',
+            'email' => 'john@example.com',
+            'phone' => '380951122555',
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith123456',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
@@ -205,20 +208,20 @@ class RegistrationApiTest extends TestCase
         $response
             ->assertStatus(422)
             ->assertJsonFragment([
-                "first_name" => [__('validation.min.string',['attribute' => 'first_name','min'=>3])],
-                "last_name" => [__('validation.min.string',['attribute' => 'last_name','min'=>3])]
+                'first_name' => [__('validation.min.string', ['attribute' => 'first_name', 'min' => 3])],
+                'last_name' => [__('validation.min.string', ['attribute' => 'last_name', 'min' => 3])],
             ]);
     }
 
     public function test_successful_registration()
     {
         $userData = [
-            "first_name" => "John",
-            "last_name" => "Smith",
-            "email" => "johnsuccess@example.com",
-            "phone" => "380951122555",
-            "password" => "Smith123456",
-            "password_confirmation" => "Smith123456",
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'johnsuccess@example.com',
+            'phone' => '380951122555',
+            'password' => 'Smith123456',
+            'password_confirmation' => 'Smith123456',
         ];
 
         $response = $this->postJson($this->register_api_url, $userData);
@@ -226,17 +229,17 @@ class RegistrationApiTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertJsonStructure([
-                "user" => [
-                    "id",
-                    "email",
-                    "first_name",
-                    "last_name",
-                    "phone",
-                    "email_verified_at",
+                'user' => [
+                    'id',
+                    'email',
+                    'first_name',
+                    'last_name',
+                    'phone',
+                    'email_verified_at',
                 ],
-                "access_token",
-                "token_type",
-                "expires_in"
+                'access_token',
+                'token_type',
+                'expires_in',
             ]);
     }
 
@@ -251,7 +254,7 @@ class RegistrationApiTest extends TestCase
             ->assertStatus(200)
             ->assertJson(
                 [
-                    "msg" => __('register.email_verification_link_sent_on_your_email')
+                    'msg' => __('register.email_verification_link_sent_on_your_email'),
                 ]
             );
     }
@@ -267,10 +270,10 @@ class RegistrationApiTest extends TestCase
             ->assertStatus(400)
             ->assertJson(
                 [
-                    "error" => [
-                        "message" => __('register.email_already_verified'),
-                        "code" => 400
-                    ]
+                    'error' => [
+                        'message' => __('register.email_already_verified'),
+                        'code' => 400,
+                    ],
                 ]
             );
     }
@@ -288,7 +291,7 @@ class RegistrationApiTest extends TestCase
         );
 
         $parse = parse_url($verifyUrl);
-        $parsedUrl = $parse['path'] . '?' . $parse['query'];
+        $parsedUrl = $parse['path'].'?'.$parse['query'];
 
         $response = $this->postJson($parsedUrl);
 
@@ -296,10 +299,10 @@ class RegistrationApiTest extends TestCase
             ->assertStatus(400)
             ->assertJson(
                 [
-                    "error" => [
-                        "message" => __('register.expired_url_provided'),
-                        "code" => 401
-                    ]
+                    'error' => [
+                        'message' => __('register.expired_url_provided'),
+                        'code' => 401,
+                    ],
                 ]
             );
     }
@@ -317,18 +320,18 @@ class RegistrationApiTest extends TestCase
         );
 
         $parse = parse_url($verifyUrl);
-        $parsedUrl = $parse['path'] . '?' . $parse['query'];
+        $parsedUrl = $parse['path'].'?'.$parse['query'];
 
-        $response = $this->postJson(substr($parsedUrl,0,-1));
+        $response = $this->postJson(substr($parsedUrl, 0, -1));
 
         $response
             ->assertStatus(400)
             ->assertJson(
                 [
-                    "error" => [
-                        "message" => __('register.invalid_url_provided'),
-                        "code" => 401
-                    ]
+                    'error' => [
+                        'message' => __('register.invalid_url_provided'),
+                        'code' => 401,
+                    ],
                 ]
             );
     }
@@ -346,7 +349,7 @@ class RegistrationApiTest extends TestCase
         );
 
         $parse = parse_url($verifyUrl);
-        $parsedUrl = $parse['path'] . '?' . $parse['query'];
+        $parsedUrl = $parse['path'].'?'.$parse['query'];
 
         $response = $this->postJson($parsedUrl);
 
@@ -354,7 +357,7 @@ class RegistrationApiTest extends TestCase
             ->assertStatus(200)
             ->assertJson(
                 [
-                    "msg" => __('register.user_successfully_verified')
+                    'msg' => __('register.user_successfully_verified'),
                 ]
             );
     }

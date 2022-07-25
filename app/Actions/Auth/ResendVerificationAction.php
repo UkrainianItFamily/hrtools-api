@@ -15,7 +15,7 @@ final class ResendVerificationAction
 
     public function execute(VerificationRequest $request): void
     {
-        if (!auth()->user() && $request->getUserId()) {
+        if (! auth()->user() && $request->getUserId()) {
             $user = $this->userRepository->getById($request->getUserId());
             auth()->login($user);
         }

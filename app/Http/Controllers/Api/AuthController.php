@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\Auth\LogoutAction;
 use App\Actions\Auth\ForgotPasswordAction;
 use App\Actions\Auth\ForgotPasswordRequest;
 use App\Actions\Auth\GetAuthenticatedUserAction;
 use App\Actions\Auth\LoginAction;
 use App\Actions\Auth\LoginRequest;
+use App\Actions\Auth\LogoutAction;
 use App\Actions\Auth\ResetPasswordAction;
 use App\Actions\Auth\ResetPasswordRequest;
 use App\Http\Presenters\AuthenticationResponseArrayPresenter;
@@ -20,7 +20,6 @@ use App\Http\Requests\Api\Auth\ResetRequest;
 
 final class AuthController extends ApiController
 {
-
     public function login(
         AuthRequest $authRequest,
         LoginAction $action,
@@ -33,7 +32,7 @@ final class AuthController extends ApiController
 
         $response = $action->execute($request);
 
-        if(!$response->getExpiresIn()){
+        if (! $response->getExpiresIn()) {
             return $this->errorResponse('Unauthorized');
         }
 
@@ -71,8 +70,7 @@ final class AuthController extends ApiController
 
     public function logout(
         LogoutAction $action
-    )
-    {
+    ) {
         $action->execute();
 
         return $this->emptyResponse();
@@ -84,5 +82,4 @@ final class AuthController extends ApiController
 
         return $this->SuccessResponse($userArrayPresenter->present($response->getUser()));
     }
-
 }

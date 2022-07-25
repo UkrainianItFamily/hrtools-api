@@ -49,15 +49,15 @@ class EmailVerificationNotification extends VerifyEmail
         );
 
         $parseUrl = parse_url($verifyUrl);
-        parse_str( $parseUrl['query'] , $parameters );
-        $customUrl = env('APP_URL') .
-            '/verify-email/' .
-            $notifiable->getId() .
-            '?expires=' .
-            $parameters['expires'] .
-            '&hash=' .
-            $parameters['hash'] .
-            '&signature=' .
+        parse_str($parseUrl['query'], $parameters);
+        $customUrl = env('APP_URL').
+            '/verify-email/'.
+            $notifiable->getId().
+            '?expires='.
+            $parameters['expires'].
+            '&hash='.
+            $parameters['hash'].
+            '&signature='.
             $parameters['signature'];
 
         return (new MailMessage)

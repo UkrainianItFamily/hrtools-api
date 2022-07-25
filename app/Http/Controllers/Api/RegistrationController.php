@@ -13,7 +13,7 @@ class RegistrationController extends ApiController
     /**
      * Register a new user
      */
-   public function register(
+    public function register(
        RegisterValidationRequest $validationRequest,
        RegisterAction $action,
        AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter

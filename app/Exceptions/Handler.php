@@ -2,12 +2,10 @@
 
 namespace App\Exceptions;
 
-use Throwable;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -53,9 +51,10 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param Throwable $exception
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Throwable  $exception
      * @return Response
+     *
      * @throws Throwable
      */
     public function render($request, Throwable $exception): Response
@@ -71,7 +70,7 @@ class Handler extends ExceptionHandler
                 JsonResponse::HTTP_BAD_REQUEST
             );
         }
+
         return parent::render($request, $exception);
     }
-
 }

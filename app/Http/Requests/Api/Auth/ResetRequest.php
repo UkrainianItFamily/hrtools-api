@@ -25,7 +25,7 @@ final class ResetRequest extends FormRequest
                 Password::min(8)
                     ->mixedCase()
                     ->numbers(),
-                'string'
+                'string',
             ],
         ];
     }

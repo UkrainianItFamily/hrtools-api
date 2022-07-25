@@ -20,7 +20,7 @@ final class RegisterAction
             'last_name' => $request->getLastName(),
             'email' => $request->getEmail(),
             'phone' => $request->getPhone(),
-            'password' => Hash::make($request->getPassword())
+            'password' => Hash::make($request->getPassword()),
         ]);
 
         $user->sendEmailVerificationNotification();
@@ -29,7 +29,7 @@ final class RegisterAction
 
         return new AuthenticationResponse(
             $user,
-            (string)$token,
+            (string) $token,
             'bearer',
             auth()->factory()->getTTL() * 60
         );

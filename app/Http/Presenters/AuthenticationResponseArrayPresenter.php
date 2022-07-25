@@ -16,7 +16,7 @@ final class AuthenticationResponseArrayPresenter
             'user' => $userArrayPresenter->present($response->getUser()),
             'access_token' => $response->getAccessToken(),
             'token_type' => $response->getTokenType(),
-            'expires_in' => $response->getExpiresIn()
+            'expires_in' => $response->getExpiresIn(),
         ];
     }
 }

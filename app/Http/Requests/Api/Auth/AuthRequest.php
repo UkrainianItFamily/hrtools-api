@@ -23,7 +23,7 @@ final class AuthRequest extends FormRequest
                 Password::min(8)
                     ->mixedCase()
                     ->numbers(),
-                'string'
+                'string',
             ],
         ];
     }

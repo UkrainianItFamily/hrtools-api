@@ -14,7 +14,8 @@ final class ResetPasswordRequest
     ) {
     }
 
-    public function getToken(): string{
+    public function getToken(): string
+    {
         return $this->token;
     }
 
@@ -23,11 +24,13 @@ final class ResetPasswordRequest
         return $this->email;
     }
 
-    public function getPassword(): string{
+    public function getPassword(): string
+    {
         return $this->password;
     }
 
-    public function getPasswordConfirmation(): string{
+    public function getPasswordConfirmation(): string
+    {
         return $this->password_confirmation;
     }
 }

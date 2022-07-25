@@ -20,13 +20,13 @@ final class VerificationAction
             throw new ExpiredUrlProvidedException();
         }
 
-        if (!$request->getValidSignature()->hasValidSignature()) {
+        if (! $request->getValidSignature()->hasValidSignature()) {
             throw new InvalidUrlProvidedException();
         }
 
         $user = $this->userRepository->getById($request->getUserId());
 
-        if (!$user->hasVerifiedEmail()) {
+        if (! $user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
         }
     }

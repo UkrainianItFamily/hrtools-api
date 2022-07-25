@@ -12,11 +12,11 @@ final class LoginAction
     {
         $token = Auth::attempt([
             'email' => $request->getEmail(),
-            'password' => $request->getPassword()
+            'password' => $request->getPassword(),
         ]);
 
-        if (!$token) {
-            return new AuthenticationResponse((object)[],'','',0);
+        if (! $token) {
+            return new AuthenticationResponse((object) [], '', '', 0);
         }
 
         $user = Auth::user();
