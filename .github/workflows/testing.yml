@@ -1,0 +1,55 @@
+name: testing
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+
+jobs:
+  Testing:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: user-test
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: hrtools-test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Cache composer
+          id: composer-cache
+          run: |
+            echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - uses: actions/cache@v2
+              with:
+                path: ${{ steps.composer-cache.outputs.dir }}
+                key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                restore-keys: |
+                  ${{ runner.os }}-composer-
+
+      - name: Run pint code-fixer
+        run: ./vendor/bin/pint
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply pint code-fixer changes
+
+      - name: Run Php unit tests
+          run: |-
+            composer install
+            cp .env.testing.example .env.testing
+            ./vendor/bin/phpunit --coverage-clover coverage.xml -c phpunit.github.xml
+#            bash <(curl -s https://codecov.io/bash)

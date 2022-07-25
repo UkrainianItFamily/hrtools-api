@@ -43,8 +43,8 @@ services:
         - "${MYSQL_PORT_TEST_DB}:3306"
       environment:
         - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=hrtools-testing
-        - MYSQL_USER=user
+        - MYSQL_DATABASE=hrtools-test
+        - MYSQL_USER=user-test
         - MYSQL_PASSWORD=secret
 
     beanstalkd:
