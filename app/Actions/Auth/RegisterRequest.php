@@ -7,7 +7,7 @@ namespace App\Actions\Auth;
 final class RegisterRequest
 {
     public function __construct(
-        private string $name,
+        private string $firstName,
         private string $lastName,
         private string $email,
         private string $phone,
@@ -15,9 +15,9 @@ final class RegisterRequest
     ) {
     }
 
-    public function getName(): string
+    public function getFirstName(): string
     {
-        return $this->name;
+        return $this->firstName;
     }
 
     public function getLastName(): string

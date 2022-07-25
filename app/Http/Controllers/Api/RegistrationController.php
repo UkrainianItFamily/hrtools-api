@@ -19,7 +19,7 @@ class RegistrationController extends ApiController
        AuthenticationResponseArrayPresenter $authenticationResponseArrayPresenter
     ): JsonResponse {
         $request = new RegisterRequest(
-            $validationRequest->get('name'),
+            $validationRequest->get('first_name'),
             $validationRequest->get('last_name'),
             $validationRequest->get('email'),
             $validationRequest->get('phone'),
