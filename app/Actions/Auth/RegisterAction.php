@@ -16,7 +16,7 @@ final class RegisterAction
     public function execute(RegisterRequest $request): AuthenticationResponse
     {
         $user = $this->userRepository->create([
-            'name' => $request->getName(),
+            'first_name' => $request->getFirstName(),
             'last_name' => $request->getLastName(),
             'email' => $request->getEmail(),
             'phone' => $request->getPhone(),
@@ -24,7 +24,6 @@ final class RegisterAction
         ]);
 
         $user->sendEmailVerificationNotification();
-
         $token = auth()->login($user);
 
         return new AuthenticationResponse(
