@@ -71,8 +71,7 @@ final class AuthController extends ApiController
 
     public function logout(
         LogoutAction $action
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $action->execute();
 
         return $this->emptyResponse();

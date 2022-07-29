@@ -26,7 +26,7 @@ final class RegisterValidationRequest extends ApiFormRequest
                 Password::min(8)
                     ->mixedCase()
                     ->numbers(),
-                'confirmed'
+                'confirmed',
             ],
         ];
     }
