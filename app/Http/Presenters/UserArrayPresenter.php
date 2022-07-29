@@ -13,7 +13,7 @@ final class UserArrayPresenter
         return [
             'id' => $user->getId(),
             'email' => $user->getEmail(),
-            'first_name' => $user->getName(),
+            'first_name' => $user->getFirstName(),
             'last_name' => $user->getLastName(),
             'phone' => $user->getPhone(),
             'email_verified_at' => $user->getVerifiedEmail(),
