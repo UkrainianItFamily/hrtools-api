@@ -54,7 +54,6 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'date_birth' => 'date:Y-m-d',
     ];
 
     /**
@@ -62,7 +61,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
-    public function getJWTIdentifier()
+    public function getJWTIdentifier(): string
     {
         return $this->getKey();
     }
@@ -72,7 +71,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
@@ -100,12 +99,17 @@ class User extends Authenticatable implements JWTSubject
         return $this->last_name;
     }
 
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
     public function getVerifiedEmail()
     {
         return $this->email_verified_at;
     }
 
-    public function sendEmailVerificationNotification()
+    public function sendEmailVerificationNotification(): void
     {
         $this->notify(new EmailVerificationNotification());
     }
