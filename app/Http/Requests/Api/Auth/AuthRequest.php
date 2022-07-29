@@ -23,7 +23,7 @@ final class AuthRequest extends ApiFormRequest
                 Password::min(8)
                     ->mixedCase()
                     ->numbers(),
-                'string'
+                'string',
             ],
         ];
     }
