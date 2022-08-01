@@ -17,6 +17,7 @@ use App\Http\Presenters\UserArrayPresenter;
 use App\Http\Requests\Api\Auth\AuthRequest;
 use App\Http\Requests\Api\Auth\PasswordResetLinkRequest;
 use App\Http\Requests\Api\Auth\ResetRequest;
+use Illuminate\Http\JsonResponse;
 
 final class AuthController extends ApiController
 {
@@ -70,7 +71,7 @@ final class AuthController extends ApiController
 
     public function logout(
         LogoutAction $action
-    ) {
+    ): JsonResponse {
         $action->execute();
 
         return $this->emptyResponse();
