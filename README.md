@@ -46,6 +46,7 @@ Install composer dependencies and generate app key:
 ```bash
 docker exec -it hrtools-app composer install
 docker exec -it hrtools-app php artisan key:generate
+docker exec -it hrtools-app php artisan jwt:secret
 ```
 
 Database migrations install (set proper .env vars)
