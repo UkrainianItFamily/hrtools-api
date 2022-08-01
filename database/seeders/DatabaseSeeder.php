@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'User',
             'phone' => '123456789012',
             'email' => 'test@example.com',
-            'password' => '123123Aa',
+            'password' => Hash::make('123123Aa'),
         ]);
     }
 }
